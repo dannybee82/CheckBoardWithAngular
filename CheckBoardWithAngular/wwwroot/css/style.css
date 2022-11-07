@@ -1,0 +1,283 @@
+﻿/*
+ * Menu
+ *
+ */
+
+.menu {
+    position:fixed;
+    float:right;
+    width:20%;
+    top: 0px;
+    right:25px;
+    z-index: 10;    
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.menuButton {
+    position: relative;
+    float: left;
+    padding: 5px;
+    background-color: cornflowerblue;
+    width: 98%;
+    border-radius: 5px;
+}
+
+.menuButton:hover {
+    cursor: pointer;
+}
+
+.menuContent {
+    transition: all linear 0.5s;
+    position: relative;
+    float: left;
+    clear: both;
+    height: auto;
+    background-image: linear-gradient(to bottom, cornflowerblue, #c4e2ed, #d8ecf3);
+    width: 100%;
+    padding-bottom: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow:hidden;
+}
+
+.menuItems {
+    width: 90%;
+    position:relative;
+    float:left;
+    clear:right;
+    margin-top:10px;
+}
+
+.menuItems label {
+    position: relative;
+    float: left;
+    margin-left: 5%;    
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+.menuItems input[type=number] {
+    position: relative;
+    margin-right: 25%;
+    float: right;
+    width: 15%;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.menuItems input[type=radio] {
+    position: relative;
+    float:left;
+    clear:both;
+    margin-left: 5%;
+}
+
+.menuItemLabelClearRight {
+    clear:right;
+    margin-bottom:5px;
+}
+
+.menuSquaresOrHexagonsContainer {
+    position: relative;
+    float: left;
+    clear: both;
+    margin-left: 5%;
+    width: 100%;
+}
+
+.menuParagraph {
+    font-size: 24px;
+    font-weight: bold;
+    width: 80%;
+    position: relative;
+    float: left;   
+    margin-top:15px;
+    margin-bottom:5px;
+}
+
+.menuParagraphSmaller {
+    font-size: 16px;
+    font-weight: bold;
+    width: 90%;
+    position: relative;
+    float: left;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+.menuSelectColor {
+    font-size: 20px;
+}
+
+.menuSelectColorContainer {
+    position: relative;
+    float: left;
+    width: 90%;
+}
+
+.menuOutputButton {
+    position: relative;
+    float: left;
+    clear: both;
+    margin-left: 5%;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.menuSquaresOrHexagonsContainer select {
+    margin-bottom: 25px;
+}
+
+label.labelHexagonSize {
+    margin-left: 0px;
+}
+
+.menuButtons {
+    position: relative;
+    float: left;
+    width: auto;
+    padding-top:15px;
+}
+
+.menuOutputButton {
+    margin: 0px;
+    padding-left:5%;
+}
+
+.menuOutputButton button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;    
+}
+
+.menuOutputButton button:hover {
+    background-color: #00cc00;
+    color: yellow;
+    cursor: pointer;
+}
+
+.menuResetButton button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.menuResetButton button:hover {
+    background-color: #4d4dff;
+    color: yellow;
+    cursor: pointer;
+}
+
+.menuBrightnessSliderPosition {
+    position: relative;
+    float: left;
+    width: 90%;   
+}
+
+.menuBrightnessSlider {
+  width: 90%;
+  background: cornflowerblue;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.menuBrightnessSlider:hover {
+  opacity: 1;
+}
+
+.menuBrightnessSlider::-webkit-slider-thumb {
+  background: darkgrey;
+  cursor: pointer;
+}
+
+.menuBrightnessSlider::-ms-thumb {  
+  background: darkgrey;
+  cursor: pointer;
+}
+
+.menuBrightnessSliderValue {
+    position: relative;
+    float: right;
+    width: 5%;
+}
+
+/*
+ * Content page.
+ *
+ */
+
+.content {
+    position: relative;
+    float: left;
+    border: 1px solid darkgray;
+}
+
+.contentContainer {
+    margin: 50px;
+    overflow: auto;
+}
+
+/*
+ * Menu animation
+ *
+ */
+
+@keyframes menuCollapsing {
+    from {
+        height: 500px;
+    }
+
+    to {
+        height: 0;
+    }
+}
+
+@keyframes menuExpanding {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 500px;
+    }
+}
+
+div.menuContent.ng-hide-add {
+    animation: 1s menuCollapsing;
+}
+
+div.menuContent.ng-hide-remove {
+    animation: 1s menuExpanding;
+}
+
+/* 
+ *   Hexagons - Float settings only.
+ *
+ */
+
+.hex {
+    float: left;
+    margin-left: 2px;    
+}
+
+.hex-top {
+    float: left;
+    width: 0;
+}
+
+.hex-middle {
+    float: left;
+}
+
+.hex-bottom {
+    float: left;
+    width: 0;
+}

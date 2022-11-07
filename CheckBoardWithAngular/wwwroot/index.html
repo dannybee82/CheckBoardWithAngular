@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="utf-8" />
+    <title>Checkboard With Angular</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+</head>
+<body ng-app="checkerboard" ng-controller="checkerboardController" defaults-and-other-variables initial-settings>
+
+    <div class="main" >
+
+        <div class="contentContainer">
+            <div class="content" style="width:{{ totalWidth }}px;height:{{ totalHeight }}px;border:{{ borderOfContent }};background-color:{{ backgroundColor }}" id="content"></div>
+        </div>
+
+        <div class="menu">
+            <div class="menuButton">
+                <img src="{{ menuItemCurrent }}" title="Menu" ng-click="ShowMenuContents()" ng-mouseenter="menuItemMouseEnter()" ng-mouseleave="menuItemMouseLeave()" mouse-event-menu />
+            </div>
+            <div class="menuContent" ng-show="menuContentVisible">
+                <form name="squareOrHexagonSettings">
+
+                    <div class="menuItems">
+                        <input type="radio" ng-model="squaresOrHexagons" name="squaresOrHexagons" value="squares" id="use_squares">
+                        <label for="use_squares" class="menuItemLabelClearRight">Squares</label>
+                        <input type="radio" ng-model="squaresOrHexagons" name="squaresOrHexagons" value="hexagons" id="use_hexagons">
+                        <label for="use_hexagons" class="menuItemLabelClearRight">Hexagons</label>
+                    </div>
+
+                    <div class="menuItems">
+                        <label for="number_of_rows">Rows:</label>
+                        <input type="number" id="number_of_rows" min="1" max="1000" ng-model="numberOfRows" name="numberOfRows" required />
+                    </div>
+
+                    <div class="menuItems">
+                        <label for="number_of_columns">Columns:</label>
+                        <input type="number" id="number_of_columns" min="1" max="1000" ng-model="numberOfColumns" name="numberOfColumns" required />
+                    </div>
+
+                    <div class="menuSquaresOrHexagonsContainer" ng-switch="squaresOrHexagons">
+                        <p ng-switch-when="squares" class="menuParagraph">Square Settings</p>
+                        <p ng-switch-when="hexagons" class="menuParagraph">Hexagon Settings</p>
+
+                        <div class="menuSelectColorContainer">
+                            <p class="menuParagraphSmaller">Select Primary Color:</p>
+                            <select ng-model="primaryColor" name="primaryColor" class="menuSelectColor">
+                                <option ng-repeat="x in predefinedCssColorNames" title="{{ x.colorname }}" style="background-color:{{ x.colorname }}" value="{{ x.colorname }}">{{x.colorname}}</option>
+                            </select>
+                        </div>
+
+                        <div class="menuSelectColorContainer">
+                            <p class="menuParagraphSmaller">Select Secondary Color:</p>
+                            <select ng-model="secondaryColor" name="secondaryColor" class="menuSelectColor">
+                                <option ng-repeat="x in predefinedCssColorNames" title="{{ x.colorname }}" style="background-color:{{ x.colorname }}" value="{{ x.colorname }}">{{x.colorname}}</option>
+                            </select>
+                        </div>
+
+                        <div class="menuSelectColorContainer">
+                            <p ng-switch-when="hexagons" class="menuParagraphSmaller">Select Tertiary Color:</p>
+                            <select ng-switch-when="hexagons" ng-model="tertiaryColor" name="tertiaryColor" class="menuSelectColor">
+                                <option ng-repeat="x in predefinedCssColorNames" title="{{ x.colorname }}" style="background-color:{{ x.colorname }}" value="{{ x.colorname }}">{{x.colorname}}</option>
+                            </select>
+                        </div>
+
+                        <div ng-switch-when="squares" class="menuItems">
+                            <label for="square_width">Square Width:</label>
+                            <input type="number" id="square_width" min="1" max="1000" value="{{squareWidth}}" ng-model="squareWidth" name="squareWidth" required />
+                        </div>
+
+                        <div ng-switch-when="squares" class="menuItems">
+                            <label for="square_height">Square Height:</label>
+                            <input type="number" id="square_height" min="1" max="1000" value="{{squareHeight}}" ng-model="squareHeight" name="squareHeight" required />
+                        </div>
+
+                        <div ng-switch-when="hexagons" class="menuItems">
+                            <label for="hexagon_size" class="labelHexagonSize">Hexagon Size:</label>
+                            <input type="number" id="hexagon_size" min="10" max="1000" value="{{hexagonSize}}" ng-model="hexagonSize" name="hexagonSize" required />
+                        </div>
+
+                        <div ng-switch-when="hexagons" class="menuItems">
+                            <label class="labelHexagonSize">Brightness:</label>
+                            <input type="range" min="-10" max="10" step="1" value="{{brightnessInPercentages}}" class="menuBrightnessSliderPosition" name="brightnessInPercentages" ng-model="brightnessInPercentages" ng-text-change="UpdateSliderValue()">
+                            <div class="menuBrightnessSliderValue">{{brightnessInPercentages}}</div>
+                        </div>
+
+                        <div class="menuSelectColorContainer">
+                            <p ng-switch-when="hexagons" class="menuParagraphSmaller">Background Color:</p>
+                            <select ng-switch-when="hexagons" ng-model="backgroundColor" name="backgroundColor" class="menuSelectColor">
+                                <option ng-repeat="x in predefinedCssColorNames" title="{{ x.colorname }}" style="background-color:{{ x.colorname }}" value="{{ x.colorname }}">{{x.colorname}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="menuButtons menuOutputButton">
+                        <button type="button" ng-click="GenerateCheckboard()" title="Generate">Generate</button>
+                    </div>
+
+                    <div class="menuButtons menuResetButton">
+                        <button type="button" ng-click="ResetAll();ResetForm()" title="Reset">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/checkerboardApp.js"></script>
+    <script src="js/checkerboardController.js"></script>
+    <script src="js/document_methods.js"></script>
+    <script src="js/mouse_events.js"></script>
+    <script src="js/defaults_and_other_variables.js"></script>
+    <script src="js/initial_settings.js"></script>
+
+</body>
+</html>
